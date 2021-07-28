@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { StyleSheet, Text, View, Alert } from 'react-native'
 import Constants from 'expo-constants'
 import TopBar from './components/TopBar'
 import axios from 'axios'
 import SwipeableImage from './components/SwipeableImage'
 import BottomBar from './components/BottomBar'
+import Swipes from './components/Swipes'
 
 export default function App() {
 
   const [users, setUsers] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const swipesRef = useRef(null)
 
   const fetchUsers = async() => {
     try {
@@ -26,13 +28,48 @@ export default function App() {
     fetchUsers()
   }, [])
 
+  const handleLike = () => {
+    console.log('like')
+    nextUser()
+  }
+
+  const handlePass = () => {
+    console.log('pass')
+    nextUser()
+  }
+
+  const nextUser = () => {
+    const nextIndex =  users.length - 2 === currentIndex ? 0 : currentIndex + 1
+    setCurrentIndex(nextIndex)
+  }
+
+  function handleLikePress() {
+    swipesRef.current.openLeft()
+  }
+  function handlePassPress() {
+    swipesRef.current.openRight()
+  }
+
   return (
     <View style={styles.container}>
       <TopBar />
       <View style={styles.swipes}>
-        {users.length > 1 && (
-          <SwipeableImage user={ users[currentIndex] }/>
-        )}
+        {
+          users.length > 1 &&
+            users.map(
+              (u, i) =>
+                currentIndex === i && (
+                  <Swipes
+                    key={i}
+                    swipesRef={swipesRef}
+                    users={users}
+                    currentIndex={currentIndex}
+                    handleLike={handleLike}
+                    handlePass={handlePass}
+                  />
+                )
+            )
+        }
       </View>
       <BottomBar />
     </View>
