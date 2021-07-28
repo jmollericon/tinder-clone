@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Alert } from 'react-native'
 import Constants from 'expo-constants'
 import TopBar from './components/TopBar'
 import axios from 'axios'
-import SwipeableImage from './components/SwipeableImage'
 import BottomBar from './components/BottomBar'
 import Swipes from './components/Swipes'
 
@@ -39,7 +38,7 @@ export default function App() {
   }
 
   const nextUser = () => {
-    const nextIndex =  users.length - 2 === currentIndex ? 0 : currentIndex + 1
+    const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1
     setCurrentIndex(nextIndex)
   }
 
@@ -54,24 +53,22 @@ export default function App() {
     <View style={styles.container}>
       <TopBar />
       <View style={styles.swipes}>
-        {
-          users.length > 1 &&
-            users.map(
-              (u, i) =>
-                currentIndex === i && (
-                  <Swipes
-                    key={i}
-                    swipesRef={swipesRef}
-                    users={users}
-                    currentIndex={currentIndex}
-                    handleLike={handleLike}
-                    handlePass={handlePass}
-                  />
-                )
-            )
-        }
+        {users.length > 1 &&
+          users.map(
+            (u, i) =>
+              currentIndex === i && (
+                <Swipes
+                  key={i}
+                  ref={swipesRef} 
+                  currentIndex={currentIndex}
+                  users={users}
+                  handleLike={handleLike}
+                  handlePass={handlePass}
+                ></Swipes>
+              )
+          )}
       </View>
-      <BottomBar />
+      <BottomBar handleLikePress={handleLikePress} handlePassPress={handlePassPress} />
     </View>
   );
 }
@@ -94,4 +91,4 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 7
   }
-});
+})

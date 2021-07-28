@@ -8,12 +8,12 @@ const SwipeableImage = ({ user, willLike, willPass }) => {
       <Image source={{ uri: user.picture.large }} style={styles.photo} />
       {willLike && (
         <View style={styles.likeBox}>
-          <Text style={{...styles.textPrimary, color: '#64EDCC'}}>LIKE</Text>
+          <Text style={{ ...styles.textPrimary, color: '#64EDCC' }}>LIKE</Text>
         </View>
       )}
       {willPass && (
         <View style={styles.passBox}>
-          <Text style={{...styles.textPrimary, color: '#F06795'}}>NOPE</Text>
+          <Text style={{ ...styles.textPrimary, color: '#F06795' }}>NOPE</Text>
         </View>
       )}
       <View style={styles.textContainer}>
@@ -44,12 +44,12 @@ const boxStyle = {
 }
 
 const styles = StyleSheet.create({
-  likeBox : {
+  likeBox: {
     ...boxStyle,
     left: 40,
     borderColor: '#64EDCC',
   },
-  passBox : {
+  passBox: {
     ...boxStyle,
     right: 40,
     borderColor: '#F06795',
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   textContainer: {
     position: 'absolute',
     bottom: 20,
-    left: 20
+    left: 20,
   },
   textRow: {
     flexDirection: 'row',
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
   },
   textPrimary: {
     color: 'white',
-    fontSize: 30,
-    fontWeight: 'bold'
+    fontSize: 35,
+    fontWeight: 'bold',
   },
   textSecondary: {
     color: 'white',
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
   textShadow: {
     textShadowColor: 'rgba(0, 0, 0, 0.80)',
     textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10
-  }
+    textShadowRadius: 10,
+  },
 })

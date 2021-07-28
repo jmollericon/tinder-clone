@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Swipeable, RectButton } from 'react-native-gesture-handler'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+import { RectButton } from 'react-native-gesture-handler'
 import SwipeableImage from './SwipeableImage'
 
 const Swipes = ({ users, currentIndex, handleLike, handlePass, swipesRef }) => {
@@ -39,18 +40,18 @@ const Swipes = ({ users, currentIndex, handleLike, handlePass, swipesRef }) => {
         setWillPass(false)
         handlePass()
       }}
-      onSwipeableLeftWillOpen={() => setWillLike((true))}
-      onSwipeableRighWilltOpen={() => setWillPass((true))}
+      onSwipeableLeftWillOpen={() => setWillLike(true)}
+      onSwipeableRighWilltOpen={() => setWillPass(true)}
     >
       <SwipeableImage user={users[currentIndex]} willLike={willLike} willPass={willPass} />
     </Swipeable>
   )
 }
 
-export default Swipes
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 })
+
+export default React.forwardRef((props, ref) => <Swipes swipesRef={ref} {...props} />)
