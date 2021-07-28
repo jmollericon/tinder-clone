@@ -4,6 +4,7 @@ import Constants from 'expo-constants'
 import TopBar from './components/TopBar'
 import axios from 'axios'
 import SwipeableImage from './components/SwipeableImage'
+import BottomBar from './components/BottomBar'
 
 export default function App() {
 
@@ -33,6 +34,7 @@ export default function App() {
           <SwipeableImage user={ users[currentIndex] }/>
         )}
       </View>
+      <BottomBar />
     </View>
   );
 }
